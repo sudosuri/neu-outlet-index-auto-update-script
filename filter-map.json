@@ -1,0 +1,1408 @@
+{
+  "globals": {
+    "category": [
+      [
+        "WDSET",
+        "Washer Dryer Sets"
+      ],
+      [
+        "WASH",
+        "Washers"
+      ],
+      [
+        "DRY",
+        "Dryers"
+      ],
+      [
+        "2IN1",
+        "All-In-One Washer Dryers"
+      ],
+      [
+        "LC",
+        "Laundry Centers"
+      ],
+      [
+        "RNG",
+        "Ranges"
+      ],
+      [
+        "DW",
+        "Dishwashers"
+      ],
+      [
+        "FRZ",
+        "Freezers"
+      ],
+      [
+        "MCR",
+        "Microwaves"
+      ],
+      [
+        "VENT",
+        "Ventallation"
+      ],
+      [
+        "WAL",
+        "Wall Ovens"
+      ],
+      [
+        "CKT",
+        "Cooktops"
+      ],
+      [
+        "ICE",
+        "Icemakers"
+      ],
+      [
+        "WHTR",
+        "Water Heaters"
+      ],
+      [
+        "GRILL",
+        "Grills"
+      ],
+      [
+        "REF",
+        "Refrigerators"
+      ],
+      [
+        "AC",
+        "Air Conditioners"
+      ],
+      [
+        "MISC",
+        "Miscellaneous"
+      ]
+    ],
+    "condition": [
+      [
+        "NEW",
+        "New (New in Box)"
+      ],
+      [
+        "CR",
+        "Certified Refurbished"
+      ],
+      [
+        "OB",
+        "Open box"
+      ],
+      [
+        "SDMIN",
+        "Scratch & Dent - Minor"
+      ],
+      [
+        "SDMOD",
+        "Scratch & Dent - Moderate"
+      ],
+      [
+        "SDMAJ",
+        "Scratch & Dent - Major"
+      ]
+    ],
+    "color": [
+      [
+        "Stainless Steel",
+        "Stainless Steel"
+      ],
+      [
+        "Panel Ready",
+        "Panel Ready"
+      ],
+      [
+        "White",
+        "White"
+      ],
+      [
+        "Black",
+        "Black"
+      ],
+      [
+        "Black Stainless",
+        "Black Stainless"
+      ],
+      [
+        "Slate",
+        "Slate"
+      ],
+      [
+        "OtherC",
+        "Other Color"
+      ]
+    ],
+    "location": [
+      [
+        "Whs",
+        "Online Only"
+      ],
+      [
+        "Burnet",
+        "In-Store"
+      ]
+    ],
+    "liquidation": [
+      [
+        "LIQ",
+        "Liquidation Appliance"
+      ]
+    ]
+  },
+  "categories": {
+    "WASH": {
+      "capacity": [
+        [
+          "5+",
+          "5 cu ft +"
+        ],
+        [
+          "4.8+",
+          "4.8 cu ft +"
+        ],
+        [
+          "4.6+",
+          "4.6 cu ft +"
+        ],
+        [
+          "4.2+",
+          "4.2 cu ft +"
+        ],
+        [
+          "4.0+",
+          "4.0 cu ft +"
+        ]
+      ],
+      "style": [
+        [
+          "Top",
+          "Top Load"
+        ],
+        [
+          "Front",
+          "Front Load"
+        ]
+      ],
+      "top_load_type": [
+        [
+          "Agi",
+          "Agitator"
+        ],
+        [
+          "Imp",
+          "Impeller"
+        ]
+      ],
+      "width": [
+        [
+          "24\"",
+          "24\""
+        ],
+        [
+          "27\"",
+          "27\""
+        ],
+        [
+          "28\"",
+          "28\""
+        ]
+      ],
+      "features": [
+        [
+          "EStr",
+          "Energy Star"
+        ],
+        [
+          "Pet",
+          "Pet Features"
+        ],
+        [
+          "He",
+          "HE (High Efficiency)"
+        ],
+        [
+          "WSteam",
+          "Steam"
+        ]
+      ]
+    },
+    "WDSET": {
+      "capacity": [
+        [
+          "5+",
+          "5 cu ft +"
+        ],
+        [
+          "4.8+",
+          "4.8 cu ft +"
+        ],
+        [
+          "4.6+",
+          "4.6 cu ft +"
+        ],
+        [
+          "4.2+",
+          "4.2 cu ft +"
+        ],
+        [
+          "4.0+",
+          "4.0 cu ft +"
+        ],
+        [
+          "8.0+",
+          "8 cu ft +"
+        ],
+        [
+          "7.8+",
+          "7.8 cu ft +"
+        ],
+        [
+          "7.4+",
+          "7.4 cu ft +"
+        ],
+        [
+          "7.0+",
+          "7 cu ft +"
+        ],
+        [
+          "6.8+",
+          "6.8 cu ft +"
+        ],
+        [
+          "6.5+",
+          "6.5 cu ft +"
+        ]
+      ],
+      "style": [
+        [
+          "Top",
+          "Top Load"
+        ],
+        [
+          "Front",
+          "Front Load"
+        ],
+        [
+          "Stk",
+          "Stackable"
+        ],
+        [
+          "NonStk",
+          "Non-Stackable"
+        ]
+      ],
+      "top_load_type": [
+        [
+          "Agi",
+          "Agitator"
+        ],
+        [
+          "Imp",
+          "Impeller"
+        ]
+      ],
+      "width": [
+        [
+          "24\"",
+          "24\""
+        ],
+        [
+          "27\"",
+          "27\""
+        ],
+        [
+          "28\"",
+          "28\""
+        ],
+        [
+          "29\"",
+          "29\""
+        ],
+        [
+          "OTHER",
+          "Other"
+        ]
+      ],
+      "features": [
+        [
+          "EStr",
+          "Energy Star"
+        ],
+        [
+          "Pet",
+          "Pet Features"
+        ],
+        [
+          "He",
+          "HE (High Efficiency)"
+        ],
+        [
+          "WSteam",
+          "Steam"
+        ],
+        [
+          "Ventless",
+          "Ventless"
+        ],
+        [
+          "HeatP",
+          "Heat Pump"
+        ],
+        [
+          "DSteam",
+          "Steam"
+        ]
+      ],
+      "fuel_type": [
+        [
+          "240v",
+          "Electric"
+        ],
+        [
+          "120v",
+          "120v Electric"
+        ],
+        [
+          "NatG",
+          "Natural Gas"
+        ],
+        [
+          "Prop",
+          "Propane"
+        ]
+      ]
+    },
+    "DRY": {
+      "style": [
+        [
+          "Stk",
+          "Stackable"
+        ],
+        [
+          "NonStk",
+          "Non-Stackable"
+        ]
+      ],
+      "fuel_type": [
+        [
+          "240v",
+          "Electric"
+        ],
+        [
+          "120v",
+          "120v Electric"
+        ],
+        [
+          "NatG",
+          "Natural Gas"
+        ],
+        [
+          "Prop",
+          "Propane"
+        ]
+      ],
+      "capacity": [
+        [
+          "8.0+",
+          "8 cu ft +"
+        ],
+        [
+          "7.8+",
+          "7.8 cu ft +"
+        ],
+        [
+          "7.4+",
+          "7.4 cu ft +"
+        ],
+        [
+          "7.0+",
+          "7 cu ft +"
+        ],
+        [
+          "6.8+",
+          "6.8 cu ft +"
+        ],
+        [
+          "6.5+",
+          "6.5 cu ft +"
+        ]
+      ],
+      "width": [
+        [
+          "24\"",
+          "24\""
+        ],
+        [
+          "27\"",
+          "27\""
+        ],
+        [
+          "28\"",
+          "28\""
+        ],
+        [
+          "29\"",
+          "29\""
+        ],
+        [
+          "OTHER",
+          "Other"
+        ]
+      ],
+      "features": [
+        [
+          "EStr",
+          "Energy Star"
+        ],
+        [
+          "He",
+          "HE (High Efficiency)"
+        ],
+        [
+          "Ventless",
+          "Ventless"
+        ],
+        [
+          "Pet",
+          "Pet Features"
+        ],
+        [
+          "HeatP",
+          "Heat Pump"
+        ],
+        [
+          "DSteam",
+          "Steam"
+        ]
+      ]
+    },
+    "LC": {
+      "fuel_type": [
+        [
+          "240v",
+          "Electric"
+        ],
+        [
+          "120v",
+          "120v Electric"
+        ],
+        [
+          "NatG",
+          "Gas"
+        ],
+        [
+          "Prop",
+          "Propane"
+        ]
+      ],
+      "width": [
+        [
+          "24\"",
+          "24\""
+        ],
+        [
+          "27\"",
+          "27\""
+        ]
+      ],
+      "features": [
+        [
+          "EStr",
+          "Energy Star"
+        ],
+        [
+          "He",
+          "HE (High Efficiency)"
+        ],
+        [
+          "Pet",
+          "Pet Features"
+        ],
+        [
+          "Ventless",
+          "Ventless"
+        ],
+        [
+          "HeatP",
+          "Heat Pump"
+        ],
+        [
+          "WSteam",
+          "Steam Washer"
+        ],
+        [
+          "DSteam",
+          "Steam Dryer"
+        ]
+      ]
+    },
+    "2IN1": {
+      "fuel_type": [
+        [
+          "240v",
+          "Electric"
+        ],
+        [
+          "120v",
+          "120v Electric"
+        ],
+        [
+          "NatG",
+          "Gas"
+        ],
+        [
+          "Prop",
+          "Propane"
+        ]
+      ],
+      "width": [
+        [
+          "24\"",
+          "24\""
+        ],
+        [
+          "27\"",
+          "27\""
+        ],
+        [
+          "28\"",
+          "28\""
+        ]
+      ],
+      "features": [
+        [
+          "EStr",
+          "Energy Star"
+        ],
+        [
+          "He",
+          "HE (High Efficiency)"
+        ],
+        [
+          "Pet",
+          "Pet Features"
+        ],
+        [
+          "Ventless",
+          "Ventless"
+        ],
+        [
+          "HeatP",
+          "Heat Pump"
+        ],
+        [
+          "Steam",
+          "Steam"
+        ]
+      ]
+    },
+    "RNG": {
+      "fuel_type": [
+        [
+          "240v",
+          "Electric"
+        ],
+        [
+          "120v",
+          "120v Electric"
+        ],
+        [
+          "Ind",
+          "Induction"
+        ],
+        [
+          "NatG",
+          "Natural Gas"
+        ],
+        [
+          "Prop",
+          "Propane"
+        ],
+        [
+          "DualF",
+          "Dual Fuel"
+        ]
+      ],
+      "width": [
+        [
+          "24\"",
+          "24\""
+        ],
+        [
+          "30\"",
+          "30\""
+        ],
+        [
+          "36\"",
+          "36\""
+        ],
+        [
+          "48\"",
+          "48\""
+        ]
+      ],
+      "cleaning_type": [
+        [
+          "ManC",
+          "Manual Cleaning"
+        ],
+        [
+          "SelfC",
+          "Self Cleaning"
+        ],
+        [
+          "SteamC",
+          "Steam Cleaning"
+        ]
+      ],
+      "style": [
+        [
+          "Luxury",
+          "Luxury"
+        ]
+      ],
+      "type": [
+        [
+          "FreeS",
+          "Free Standing"
+        ],
+        [
+          "Slid",
+          "Slide In"
+        ]
+      ],
+      "features": [
+        [
+          "CONV",
+          "Convection"
+        ],
+        [
+          "Grdl",
+          "Griddle"
+        ],
+        [
+          "EStr",
+          "Energy Star"
+        ],
+        [
+          "DblO",
+          "Double Oven"
+        ]
+      ]
+    },
+    "REF": {
+      "style": [
+        [
+          "TB",
+          "Top Freezer Bottom Fridge"
+        ],
+        [
+          "BT",
+          "Bottom Freezer Top Fridge"
+        ],
+        [
+          "SXS",
+          "Side by Side"
+        ],
+        [
+          "3DR",
+          "3 Door French Door"
+        ],
+        [
+          "4DR",
+          "4 Door French Door"
+        ],
+        [
+          "5DR",
+          "5 Door French Door"
+        ],
+        [
+          "ALLREF",
+          "All Refrigerator"
+        ],
+        [
+          "MINI",
+          "Mini Fridge"
+        ],
+        [
+          "WINE",
+          "Wine Cooler"
+        ],
+        [
+          "BEV",
+          "Beverage Cooler"
+        ],
+        [
+          "KEG",
+          "Beer Taps & Kegerator"
+        ],
+        [
+          "Luxury",
+          "Luxury"
+        ]
+      ],
+      "width": [
+        [
+          "15\"",
+          "15\""
+        ],
+        [
+          "18\"",
+          "18\""
+        ],
+        [
+          "24\"",
+          "24\""
+        ],
+        [
+          "28\"",
+          "28\""
+        ],
+        [
+          "30\"",
+          "30\""
+        ],
+        [
+          "33\"",
+          "33\""
+        ],
+        [
+          "36\"",
+          "36\""
+        ],
+        [
+          "42\"",
+          "42\""
+        ],
+        [
+          "48\"",
+          "48\""
+        ]
+      ],
+      "features": [
+        [
+          "CD",
+          "Counter Depth"
+        ],
+        [
+          "ESTR",
+          "Energy Star"
+        ],
+        [
+          "ICEM",
+          "Ice Maker"
+        ],
+        [
+          "DUAL",
+          "Dual Ice Maker"
+        ],
+        [
+          "FLEX",
+          "Flex - Zone"
+        ],
+        [
+          "ZERO",
+          "Zero Clearance Hinges"
+        ],
+        [
+          "DISP",
+          "External Dispenser"
+        ],
+        [
+          "INTDISP",
+          "Internal Water Dispenser"
+        ],
+        [
+          "PITCH",
+          "Auto Fill Pitcher"
+        ],
+        [
+          "GARAGE",
+          "Garage Ready"
+        ],
+        [
+          "OUTDOOR",
+          "Approved for Outdoor Use"
+        ],
+        [
+          "DND",
+          "Door-in-Door"
+        ],
+        [
+          "BI",
+          "Built In"
+        ],
+        [
+          "PR",
+          "Panel Ready"
+        ]
+      ]
+    },
+    "DW": {
+      "style": [
+        [
+          "BUILD",
+          "Built-In"
+        ],
+        [
+          "PORT",
+          "Portable"
+        ],
+        [
+          "CT",
+          "Counter-Top"
+        ],
+        [
+          "LUXURY",
+          "Luxury"
+        ]
+      ],
+      "tub_material": [
+        [
+          "SS",
+          "Stainless Steel"
+        ],
+        [
+          "PLASTIC",
+          "Plastic"
+        ],
+        [
+          "HYBRID",
+          "Hybrid"
+        ]
+      ],
+      "features": [
+        [
+          "ESTR",
+          "Energy Star"
+        ],
+        [
+          "AUTOOPEN",
+          "Auto Open Door Drying"
+        ],
+        [
+          "WSOFT",
+          "Water Softener"
+        ],
+        [
+          "PR",
+          "Panel Ready"
+        ],
+        [
+          "ADJRACK",
+          "Adjustable Racks"
+        ],
+        [
+          "3RD",
+          "Third Rack"
+        ]
+      ]
+    },
+    "FRZ": {
+      "style": [
+        [
+          "CHEST",
+          "Chest Freezer"
+        ],
+        [
+          "STUF",
+          "Standup Freezer"
+        ],
+        [
+          "COLFRZ",
+          "Column Freezer"
+        ],
+        [
+          "LUXURY",
+          "Luxury"
+        ]
+      ],
+      "features": [
+        [
+          "ESTR",
+          "Energy Star"
+        ],
+        [
+          "BI",
+          "Built in"
+        ],
+        [
+          "ICEM",
+          "Ice Maker"
+        ],
+        [
+          "GARAGE",
+          "Garage Ready"
+        ],
+        [
+          "PR",
+          "Panel Ready"
+        ],
+        [
+          "CONVERT",
+          "Convertible to Refrigerator"
+        ]
+      ]
+    },
+    "MCR": {
+      "style": [
+        [
+          "OTR",
+          "Over the Range"
+        ],
+        [
+          "CT",
+          "Counter Top"
+        ],
+        [
+          "BI",
+          "Built In"
+        ],
+        [
+          "DRAWER",
+          "Drawer"
+        ],
+        [
+          "LUXURY",
+          "Luxury"
+        ]
+      ],
+      "width": [
+        [
+          "18\"",
+          "18\" or Smaller"
+        ],
+        [
+          "20\"",
+          "20\""
+        ],
+        [
+          "24\"",
+          "24\""
+        ],
+        [
+          "30\"",
+          "30\""
+        ]
+      ],
+      "features": [
+        [
+          "ESTR",
+          "Energy Star"
+        ],
+        [
+          "SENSOR",
+          "Sensor Cooking"
+        ],
+        [
+          "CONV",
+          "Convection"
+        ]
+      ]
+    },
+    "VENT": {
+      "style": [
+        [
+          "HOOD",
+          "Hood"
+        ],
+        [
+          "INS",
+          "Insert"
+        ],
+        [
+          "DOWN",
+          "Downdraft"
+        ],
+        [
+          "LUXURY",
+          "Luxury"
+        ]
+      ],
+      "width": [
+        [
+          "24\"",
+          "24\""
+        ],
+        [
+          "30\"",
+          "30\""
+        ],
+        [
+          "36\"",
+          "36\""
+        ],
+        [
+          "42\"",
+          "42\""
+        ],
+        [
+          "48\"",
+          "48\""
+        ]
+      ],
+      "features": [
+        [
+          "OUTDOOR",
+          "Approved for Outdoor Use"
+        ]
+      ]
+    },
+    "WAL": {
+      "fuel_type": [
+        [
+          "240v",
+          "Electric"
+        ],
+        [
+          "NatG",
+          "Natural Gas"
+        ],
+        [
+          "Prop",
+          "Propane"
+        ]
+      ],
+      "width": [
+        [
+          "24\"",
+          "24\""
+        ],
+        [
+          "27\"",
+          "27\""
+        ],
+        [
+          "30\"",
+          "30\""
+        ]
+      ],
+      "style": [
+        [
+          "LUXURY",
+          "Luxury"
+        ]
+      ],
+      "features": [
+        [
+          "MW+OVEN",
+          "Microwave + Oven Combo"
+        ],
+        [
+          "SPEED",
+          "Speed Oven"
+        ],
+        [
+          "WARM",
+          "Warming Drawer"
+        ],
+        [
+          "STEAMO",
+          "Steam Oven"
+        ],
+        [
+          "ESTR",
+          "Energy Star"
+        ],
+        [
+          "SELFC",
+          "Self Cleaning"
+        ],
+        [
+          "DblO",
+          "Double Oven"
+        ],
+        [
+          "Conv",
+          "Convection"
+        ]
+      ]
+    },
+    "CKT": {
+      "fuel_type": [
+        [
+          "240v",
+          "Electric"
+        ],
+        [
+          "IND",
+          "Induction"
+        ],
+        [
+          "NatG",
+          "Natural Gas"
+        ],
+        [
+          "Prop",
+          "Propane"
+        ]
+      ],
+      "style": [
+        [
+          "LUXURY",
+          "Luxury"
+        ]
+      ],
+      "width": [
+        [
+          "24\"",
+          "24\""
+        ],
+        [
+          "30\"",
+          "30\""
+        ],
+        [
+          "36\"",
+          "36\""
+        ],
+        [
+          "48\"",
+          "48\""
+        ]
+      ],
+      "features": [
+        [
+          "Grdl",
+          "Griddle"
+        ],
+        [
+          "RTOP",
+          "Rangetop"
+        ]
+      ]
+    },
+    "WHTR": {
+      "style": [
+        [
+          "TANK",
+          "Tank"
+        ],
+        [
+          "TLESS",
+          "Tankless"
+        ]
+      ],
+      "fuel_type": [
+        [
+          "240v",
+          "Electric 240V"
+        ],
+        [
+          "120v",
+          "Electric 120V"
+        ],
+        [
+          "NatG",
+          "Natural Gas"
+        ],
+        [
+          "Prop",
+          "Propane"
+        ]
+      ],
+      "features": [
+        [
+          "ESTR",
+          "Energy Star"
+        ]
+      ]
+    },
+    "ICE": {
+      "style": [
+        [
+          "FreeS",
+          "Free Standing"
+        ],
+        [
+          "CT",
+          "Countertop"
+        ],
+        [
+          "UC",
+          "Under Counter"
+        ],
+        [
+          "LUXURY",
+          "Luxury"
+        ]
+      ],
+      "ice_type": [
+        [
+          "SQR",
+          "Square"
+        ],
+        [
+          "CRES",
+          "Crescent"
+        ],
+        [
+          "NUG",
+          "Nugget"
+        ],
+        [
+          "CUBE",
+          "Gourmet Cube"
+        ],
+        [
+          "OCT",
+          "Octagonal"
+        ],
+        [
+          "SPEC",
+          "Specialty"
+        ]
+      ],
+      "clear_ice": [
+        [
+          "Clear",
+          "Yes"
+        ],
+        [
+          "NoClear",
+          "No"
+        ]
+      ],
+      "drain": [
+        [
+          "Drain",
+          "Yes"
+        ],
+        [
+          "NoDrain",
+          "No"
+        ]
+      ],
+      "pump": [
+        [
+          "Pump",
+          "Yes"
+        ],
+        [
+          "NoPump",
+          "No"
+        ]
+      ],
+      "width": [
+        [
+          "15\"",
+          "15\""
+        ],
+        [
+          "18\"",
+          "18\""
+        ]
+      ],
+      "features": [
+        [
+          "ESTR",
+          "Energy Star"
+        ],
+        [
+          "OUTDOOR",
+          "Approved for Outdoor Use"
+        ],
+        [
+          "PR",
+          "Panel Ready"
+        ]
+      ]
+    },
+    "GRILL": {
+      "fuel_type": [
+        [
+          "Prop",
+          "Propane"
+        ],
+        [
+          "NatG",
+          "Natural Gas"
+        ],
+        [
+          "PELLET",
+          "Pellet"
+        ],
+        [
+          "ELEC",
+          "Electric"
+        ],
+        [
+          "WOOD",
+          "Wood"
+        ],
+        [
+          "COMBO",
+          "Combo"
+        ],
+        [
+          "CHARC",
+          "Charcoal"
+        ]
+      ],
+      "style": [
+        [
+          "LUXURY",
+          "Luxury"
+        ]
+      ],
+      "type": [
+        [
+          "FreeS",
+          "Free Standing"
+        ],
+        [
+          "Built in",
+          "Built in"
+        ]
+      ],
+      "features": [
+        [
+          "Flat Top",
+          "Flat Top"
+        ],
+        [
+          "Bt",
+          "Bluetooth"
+        ],
+        [
+          "PIZZA",
+          "Pizza Oven"
+        ],
+        [
+          "Rot",
+          "Rotisserie"
+        ]
+      ]
+    },
+    "AC": {
+      "type": [
+        [
+          "WIND",
+          "Window Units"
+        ],
+        [
+          "PORT",
+          "Portable Units"
+        ],
+        [
+          "MSPLIT",
+          "Mini Splits"
+        ],
+        [
+          "DEHUM",
+          "Dehumidfiers"
+        ],
+        [
+          "HUMID",
+          "Humidifiers"
+        ],
+        [
+          "HEAT",
+          "Heaters"
+        ],
+        [
+          "ACMISC",
+          "miscellaneous"
+        ]
+      ]
+    }
+  }
+}

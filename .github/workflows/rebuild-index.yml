@@ -1,0 +1,38 @@
+name: Rebuild filter index
+
+# Keeps the storefront facet index (filter-index.json) fresh so sold / unpublished / POS
+# products drop out of the collection grid within minutes instead of lingering until the
+# next manual build. build-index.mjs is the server-side filter (availableForSale + published
+# + sitemap); running it on a schedule is what turns it into a near-real-time guarantee.
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'   # every 15 minutes
+  workflow_dispatch: {}       # allow manual runs
+
+# Avoid overlapping runs
+concurrency:
+  group: rebuild-index
+  cancel-in-progress: true
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build index from live Shopify data
+        env:
+          NEU_SHOPIFY_STORE: ${{ secrets.NEU_SHOPIFY_STORE }}
+          NEU_SHOPIFY_ACCESS_TOKEN: ${{ secrets.NEU_SHOPIFY_ACCESS_TOKEN }}
+          NEU_SHOPIFY_API_VERSION: '2025-01'
+        run: node build-index.mjs
+      - name: Deploy index to the live theme
+        env:
+          NEU_SHOPIFY_STORE: ${{ secrets.NEU_SHOPIFY_STORE }}
+          NEU_SHOPIFY_ACCESS_TOKEN: ${{ secrets.NEU_SHOPIFY_ACCESS_TOKEN }}
+          NEU_SHOPIFY_API_VERSION: '2025-01'
+          NEU_THEME_ID: ${{ secrets.NEU_THEME_ID }}
+        run: node deploy-index.mjs

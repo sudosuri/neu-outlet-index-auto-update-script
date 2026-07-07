@@ -1,0 +1,12 @@
+# Secrets — never commit
+.env
+
+# Node
+node_modules/
+
+# Logs
+*.log
+
+# Generated at runtime by build-index.mjs / build-taxonomy.mjs (deployed straight to the theme, not committed)
+filter-index.json
+filter-taxonomy.json
