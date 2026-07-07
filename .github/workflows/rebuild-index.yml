@@ -1,16 +1,10 @@
 name: Rebuild filter index
 
-# Keeps the storefront facet index (filter-index.json) fresh so sold / unpublished / POS
-# products drop out of the collection grid within minutes instead of lingering until the
-# next manual build. build-index.mjs is the server-side filter (availableForSale + published
-# + sitemap); running it on a schedule is what turns it into a near-real-time guarantee.
-
 on:
   schedule:
     - cron: '*/15 * * * *'   # every 15 minutes
-  workflow_dispatch: {}       # allow manual runs
+  workflow_dispatch: {}       # manual runs from the Actions tab
 
-# Avoid overlapping runs
 concurrency:
   group: rebuild-index
   cancel-in-progress: true
@@ -18,6 +12,7 @@ concurrency:
 jobs:
   rebuild:
     runs-on: ubuntu-latest
+    environment: Neu Outlet        # secrets/vars live on this environment
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -25,14 +20,14 @@ jobs:
           node-version: '22'
       - name: Build index from live Shopify data
         env:
-          NEU_SHOPIFY_STORE: ${{ secrets.NEU_SHOPIFY_STORE }}
+          NEU_SHOPIFY_STORE: ${{ vars.NEU_SHOPIFY_STORE }}
           NEU_SHOPIFY_ACCESS_TOKEN: ${{ secrets.NEU_SHOPIFY_ACCESS_TOKEN }}
           NEU_SHOPIFY_API_VERSION: '2025-01'
         run: node build-index.mjs
-      - name: Deploy index to the live theme
+      - name: Deploy index to the theme
         env:
-          NEU_SHOPIFY_STORE: ${{ secrets.NEU_SHOPIFY_STORE }}
+          NEU_SHOPIFY_STORE: ${{ vars.NEU_SHOPIFY_STORE }}
           NEU_SHOPIFY_ACCESS_TOKEN: ${{ secrets.NEU_SHOPIFY_ACCESS_TOKEN }}
           NEU_SHOPIFY_API_VERSION: '2025-01'
-          NEU_THEME_ID: ${{ secrets.NEU_THEME_ID }}
+          NEU_THEME_ID: ${{ vars.NEU_THEME_ID }}
         run: node deploy-index.mjs
