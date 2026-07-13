@@ -124,16 +124,36 @@ const numId = (g) => g.split('/').pop();
 // (a real data inconsistency we hit). Gating on sitemap membership drops those broken 404 cards
 // without hiding legit in-stock products that merely aren't in the all-appliances collection.
 const STORE_URL = (process.env.STORE_URL || 'https://neuapplianceoutlet.com').replace(/\/$/, '');
+async function fetchText(url, tries = 3) {
+  let lastErr;
+  for (let i = 0; i < tries; i++) {
+    try { const r = await fetch(url, { headers: { 'user-agent': 'neu-index-builder' } }); if (r.ok) return await r.text(); lastErr = new Error('HTTP ' + r.status); }
+    catch (e) { lastErr = e; }
+    await new Promise((res) => setTimeout(res, 800 * (i + 1)));
+  }
+  throw lastErr || new Error('fetch failed: ' + url);
+}
 async function sitemapHandles() {
   const set = new Set();
   try {
-    const idx = await (await fetch(`${STORE_URL}/sitemap.xml`)).text();
+    const idx = await fetchText(`${STORE_URL}/sitemap.xml`);
     const files = [...idx.matchAll(/<loc>([^<]*sitemap_products[^<]*)<\/loc>/g)].map((m) => m[1]);
+    if (!files.length) throw new Error('no product sitemaps found in sitemap.xml');
     for (const f of files) {
-      const xml = await (await fetch(f)).text();
-      for (const m of xml.matchAll(/\/products\/([^<>"?#]+)/g)) set.add(decodeURIComponent(m[1]).toLowerCase());
+      const xml = await fetchText(f);
+      let n = 0;
+      for (const m of xml.matchAll(/\/products\/([^<>"?#]+)/g)) { set.add(decodeURIComponent(m[1]).toLowerCase()); n++; }
+      // A real product-sitemap page always has handles. Zero = throttled/partial response — bail so we
+      // don't proceed with an incomplete "live" set that would gate out most of the catalog.
+      if (n === 0) throw new Error('product sitemap returned 0 handles: ' + f);
     }
-  } catch (e) { console.warn('sitemap fetch failed, skipping liveness gate:', e.message); }
+  } catch (e) {
+    // SAFETY: never let an incomplete sitemap decimate the index. Disable the liveness gate for this
+    // run instead (falls back to onlineStoreUrl + availableForSale). A few Admin-published-but-404
+    // cards beats silently dropping thousands of real products (what produced the 226-product build).
+    console.warn('sitemap fetch incomplete — DISABLING liveness gate for this run:', e.message);
+    return new Set();
+  }
   return set;
 }
 const LIVE_HANDLES = await sitemapHandles();
