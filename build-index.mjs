@@ -200,6 +200,7 @@ do {
       prio: prio == null ? 99 : prio,
       added: p.createdAt ? Date.parse(p.createdAt) : 0,   // for the "Recently Added" sort (task 86e26y4c9)
       liq: (p.tags || []).some(function (t) { return String(t).toLowerCase() === 'discount_liq'; }), // Discount_LIQ = no warranty / 30-day (task 86e26z33m) — cards read this
+      rnd: Math.random(),   // stable-per-rebuild shuffle key for the "Outlet Appliances" random top mix (task 86e27z1mb)
 
       f,
     });
