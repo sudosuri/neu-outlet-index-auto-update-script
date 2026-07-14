@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "crons": [
-    { "path": "/api/rebuild", "schedule": "*/15 * * * *" }
+    { "path": "/api/rebuild", "schedule": "*/20 * * * *" }
   ],
   "functions": {
     "api/rebuild.mjs": {
