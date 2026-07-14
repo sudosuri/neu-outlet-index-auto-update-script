@@ -156,12 +156,13 @@ async function sitemapHandles() {
   }
   return set;
 }
-const LIVE_HANDLES = await sitemapHandles();
-console.log(`sitemap live product handles: ${LIVE_HANDLES.size}${LIVE_HANDLES.size ? '' : ' (gate disabled)'}`);
+export async function buildIndex() {
+  const LIVE_HANDLES = await sitemapHandles();
+  console.error(`sitemap live product handles: ${LIVE_HANDLES.size}${LIVE_HANDLES.size ? '' : ' (gate disabled)'}`);
 
-let cursor = null, scanned = 0, excluded = 0;
-const items = [];
-do {
+  let cursor = null, scanned = 0, excluded = 0;
+  const items = [];
+  do {
   const d = await gql(Q, { c: cursor });
   for (const p of d.products.nodes) {
     scanned++;
@@ -219,12 +220,19 @@ function facetsFromMetafields(nodes) {
   return { f, prio };
 }
 
-items.sort((a, b) => a.prio - b.prio || a.price - b.price);
-writeFileSync(new URL('./filter-index.json', import.meta.url), JSON.stringify(items));
+  items.sort((a, b) => a.prio - b.prio || a.price - b.price);
+  const tagged = items.filter((it) => it.f && it.f.category).length;
+  const fc = {};
+  for (const it of items) for (const k of Object.keys(it.f)) fc[k] = (fc[k] || 0) + 1;
+  return { items, stats: { indexed: items.length, scanned, excluded, tagged, sitemap: LIVE_HANDLES.size, source: FROM_MF ? 'metafields' : 'tags', coverage: fc } };
+}
 
-const tagged = items.filter((it) => it.f && it.f.category).length;
-console.log(`[source: ${FROM_MF ? 'metafields' : 'tags'}] indexed ${items.length} browsable products of ${scanned} active scanned (excluded ${excluded} gift/connection/service; 0-stock dropped)`);
-console.log(`  filterable now (have category facet): ${tagged}  |  shown-but-not-yet-filterable: ${items.length - tagged}`);
-const fc = {};
-for (const it of items) for (const k of Object.keys(it.f)) fc[k] = (fc[k] || 0) + 1;
-console.log('facet coverage:', JSON.stringify(fc));
+// CLI: `node build-index.mjs` builds + writes filter-index.json (GitHub Action / local runs).
+// When imported (e.g. by the Vercel function in api/rebuild.mjs) only buildIndex() is used and this is skipped.
+if (process.argv[1] && process.argv[1].replace(/\\/g, '/').endsWith('build-index.mjs')) {
+  const { items, stats } = await buildIndex();
+  writeFileSync(new URL('./filter-index.json', import.meta.url), JSON.stringify(items));
+  console.log(`[source: ${stats.source}] indexed ${stats.indexed} browsable products of ${stats.scanned} active scanned (excluded ${stats.excluded} gift/connection/service; 0-stock dropped)`);
+  console.log(`  filterable now (have category facet): ${stats.tagged}  |  shown-but-not-yet-filterable: ${stats.indexed - stats.tagged}`);
+  console.log('facet coverage:', JSON.stringify(stats.coverage));
+}

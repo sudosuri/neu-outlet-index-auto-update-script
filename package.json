@@ -1,0 +1,7 @@
+{
+  "name": "neu-outlet-index",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Rebuilds the Neu Outlet storefront filter index and deploys it to the live theme. Runs via Vercel Cron (api/rebuild) or the GitHub Action (node build-index.mjs && node deploy-index.mjs)."
+}

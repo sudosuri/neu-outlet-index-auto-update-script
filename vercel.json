@@ -1,0 +1,12 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "crons": [
+    { "path": "/api/rebuild", "schedule": "*/15 * * * *" }
+  ],
+  "functions": {
+    "api/rebuild.mjs": {
+      "maxDuration": 300,
+      "includeFiles": "filter-map.json"
+    }
+  }
+}
