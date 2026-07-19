@@ -6,8 +6,14 @@
 import { readFileSync } from 'node:fs';
 import { loadEnv } from './lib.mjs';
 
+// The LIVE theme the index deploys to. Committed here on purpose (NOT read from NEU_THEME_ID) so a
+// stale dashboard/CI env var can never silently keep deploying to an old theme — both the Vercel cron
+// and the GitHub Action import this. When the live theme changes, update THIS value (or set an explicit
+// NEU_THEME_ID_OVERRIDE env var for a one-off). Went live 2026-07-17 (was 156331507885). — task: theme swap
+export const LIVE_THEME_ID = '156583362733';
+
 // PUT a single theme asset. `jsonString` is the raw filter-index.json contents.
-export async function deployIndex(jsonString, { themeId = process.env.NEU_THEME_ID, key = 'assets/filter-index.json' } = {}) {
+export async function deployIndex(jsonString, { themeId = process.env.NEU_THEME_ID_OVERRIDE || LIVE_THEME_ID, key = 'assets/filter-index.json' } = {}) {
   const { store, token, version } = loadEnv();
   if (!themeId) throw new Error('Missing NEU_THEME_ID (the live theme id to deploy to).');
   const url = `https://${store}/admin/api/${version}/themes/${themeId}/assets.json`;

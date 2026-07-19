@@ -1,8 +1,9 @@
 name: Rebuild filter index
 
 on:
-  schedule:
-    - cron: '*/5 * * * *'   # every 5 minutes
+  # Scheduled runs RETIRED 2026-07-17 — the Vercel cron (every 20 min, see ../vercel.json) is now the
+  # sole scheduler; GitHub's hosted-runner queue lagged 20-30 min. Kept as a MANUAL fallback only.
+  # (The deploy target is the committed LIVE_THEME_ID in deploy-index.mjs, not the NEU_THEME_ID var.)
   workflow_dispatch: {}       # manual runs from the Actions tab
 
 concurrency:

@@ -41,7 +41,10 @@ function pickOne(codes) { let best = null, bp = 999; for (const c of codes) { le
 // and <Dimension>_<Category>_<Value> for category-scoped dims (Condition_REF_SDMOD, Style_REF_3DR,
 // Width_MCR_30in). We parse those AND still read the old bare codes (both coexist during transition),
 // normalizing values to our taxonomy (30in -> 30", 7.4 -> 7.4+). Condition also bridges legacy numeric.
-const DIM_PREFIX = { category: 'category', condition: 'condition', color: 'color', location: 'location', capacity: 'capacity', style: 'style', fuel: 'fuel_type', width: 'width', feature: 'features', features: 'features', type: 'type', cleaning: 'cleaning_type', tub: 'tub_material', ice: 'ice_type', clear: 'clear_ice', drain: 'drain', pump: 'pump', topload: 'top_load_type' };
+// Prefix -> facet dim. The 7.3 sheet RENAMED several prefixes (CleaningType/ClearIce/IceType/
+// TopLoadStyle/TubMaterial) and added Venting — keep the old short keys for transition back-compat
+// AND map the new ones, else those tags are silently dropped and their filters render empty (task 86e2a5jt5).
+const DIM_PREFIX = { category: 'category', condition: 'condition', color: 'color', location: 'location', capacity: 'capacity', style: 'style', fuel: 'fuel_type', width: 'width', feature: 'features', features: 'features', type: 'type', cleaning: 'cleaning_type', cleaningtype: 'cleaning_type', tub: 'tub_material', tubmaterial: 'tub_material', ice: 'ice_type', icetype: 'ice_type', clear: 'clear_ice', clearice: 'clear_ice', drain: 'drain', pump: 'pump', topload: 'top_load_type', toploadstyle: 'top_load_type', venting: 'venting' };
 const CATSET = new Set(['wdset', 'wash', 'dry', '2in1', 'lc', 'rng', 'dw', 'frz', 'mcr', 'vent', 'wal', 'ckt', 'ice', 'whtr', 'grill', 'ref', 'ac', 'misc']);
 function normVal(dim, v) {
   v = String(v).trim();
