@@ -114,6 +114,7 @@ const Q = `query($c:String){
     nodes{
       id handle title vendor isGiftCard productType totalInventory tags onlineStoreUrl createdAt
       featuredImage{ url(transform:{maxWidth:600}) }
+      images(first:2){ nodes{ url(transform:{maxWidth:600}) } }
       variants(first:1){ nodes{ price compareAtPrice availableForSale } }
       metafields(first:40, namespace:"filter"){ nodes{ key value } }
     }
@@ -197,6 +198,14 @@ export async function buildIndex() {
       title: p.title,
       vendor: p.vendor || 'Neu Outlet',
       img: p.featuredImage ? p.featuredImage.url : null,
+      // task 86e2f3eny: 2nd gallery image for the card hover-swap. Only stored when it differs from the
+      // primary, so JS card builders can render an alt image only when there's a real second photo.
+      img2: (function () {
+        var nodes = (p.images && p.images.nodes) ? p.images.nodes : [];
+        var second = nodes[1] ? nodes[1].url : null;
+        var first = p.featuredImage ? p.featuredImage.url : (nodes[0] ? nodes[0].url : null);
+        return (second && second !== first) ? second : null;
+      })(),
       price, cap: cap > price ? cap : 0,
       avail: true,
       cond: cond || '',
