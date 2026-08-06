@@ -27,7 +27,10 @@ front-end filters.
    | --- | --- |
    | `NEU_SHOPIFY_STORE` | `neu-appliances-2021.myshopify.com` |
    | `NEU_SHOPIFY_ACCESS_TOKEN` | the token from step 1 |
-   | `NEU_THEME_ID` | the **live** theme id (e.g. `156181364909`) |
+
+   Do **not** add a `NEU_THEME_ID`. The deploy target is resolved live from the Admin API (the published
+   `role=main` theme), so republishing a theme needs no config change — and a stale value now aborts the
+   deploy rather than silently writing the index to a retired theme.
 3. **Enable Actions** on the repo (Actions tab).
 4. **Run it once manually**: Actions → "Rebuild filter index" → Run workflow. Confirm it builds + deploys.
 
@@ -37,9 +40,9 @@ After that it runs automatically every 15 minutes. To verify: change a product t
 ## Local run (optional)
 
 ```
-cp .env.example .env      # then paste your real token + theme id into .env
+cp .env.example .env      # then paste your real token into .env (no theme id needed)
 node build-index.mjs      # writes filter-index.json
-node deploy-index.mjs     # uploads it to NEU_THEME_ID
+node deploy-index.mjs     # uploads it to the PUBLISHED theme (resolved live; prints the target)
 ```
 
 ## Adjusting the schedule
