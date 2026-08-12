@@ -62,6 +62,13 @@ function facetsFromTags(tags) {
     if (dim !== 'category' && dim !== 'location') { const n = rest.indexOf('_'); if (n >= 0 && CATSET.has(rest.slice(0, n).toLowerCase())) rest = rest.slice(n + 1); }
     add(dim, normVal(dim, rest));
   }
+  // Generic "Luxury" feature (task 86e2qfek7). Products now carry a bare `LUXURY` tag; some also still
+  // carry the legacy category-scoped `Luxury_REF`/`Luxury_RNG` form. Neither fits the Dimension_ prefix
+  // scheme above (bare `LUXURY` has no `_`; `Luxury_REF`'s prefix isn't in DIM_PREFIX) nor a bare category
+  // code in buildMetafields (the live tags are prefixed `Category_REF`, so its per-category loop never runs),
+  // so recognize both here and normalize to the single generic taxonomy option `Luxury` (which lives under
+  // every category's Features facet in filter-taxonomy.json). Match is case-insensitive.
+  if ((tags || []).some((t) => { const s = String(t).toLowerCase(); return s === 'luxury' || s.startsWith('luxury_'); })) add('features', 'Luxury');
   // Condition: exactly ONE per product so the filter counts reconcile with the product total.
   // Prefer the authoritative new-system condition (prefixed/alpha, already in f.condition); fall back
   // to the legacy numeric tag ONLY when there's no new-system condition.
