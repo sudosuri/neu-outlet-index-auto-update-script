@@ -122,8 +122,9 @@ const Q = `query($c:String){
       id handle title vendor isGiftCard productType totalInventory tags onlineStoreUrl createdAt
       featuredImage{ url(transform:{maxWidth:600}) }
       images(first:2){ nodes{ url(transform:{maxWidth:600}) } }
-      variants(first:1){ nodes{ price compareAtPrice availableForSale } }
+      variants(first:1){ nodes{ price compareAtPrice availableForSale sku } }
       metafields(first:40, namespace:"filter"){ nodes{ key value } }
+      model: metafield(namespace:"custom", key:"model"){ value }
     }
   }
 }`;
@@ -204,6 +205,9 @@ export async function buildIndex() {
       url: `/products/${p.handle}`,
       title: p.title,
       vendor: p.vendor || 'Neu Outlet',
+      // task 86e2xdz6w: Item # (variant SKU) + Model (custom.model metafield) for the product cards
+      sku: (v.sku || '').trim(),
+      model: (p.model && p.model.value ? String(p.model.value).trim() : ''),
       img: p.featuredImage ? p.featuredImage.url : null,
       // task 86e2f3eny: 2nd gallery image for the card hover-swap. Only stored when it differs from the
       // primary, so JS card builders can render an alt image only when there's a real second photo.
