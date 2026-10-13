@@ -168,11 +168,36 @@ async function sitemapHandles() {
   }
   return set;
 }
+// The product sitemap is Shopify-generated and is NOT a reliable realtime view of what is live:
+//   - it LAGS product creation by hours, and
+//   - its cached copies FLAP. Observed 2026-10-13 in the Vercel cron logs, within 20 minutes:
+//     6332 handles at 14:20 UTC, 6328 at 14:40, 6332 at 15:00, which made the published index
+//     swing 897 -> 893 -> 897 products and tripped the "newest product is 83h old" alarm.
+// Both effects only ever touch the NEWEST products, so instead of dropping those we verify them
+// directly against the storefront. A product that is genuinely unpublished still 404s here, so the
+// gate keeps doing its real job (dropping Admin-published-but-404 cards).
+const RECENT_MS = Number(process.env.SITEMAP_GRACE_HOURS || 72) * 3600 * 1000;
+const liveChecked = new Map();
+async function storefrontLive(handle) {
+  const key = String(handle || '');
+  if (!key) return false;
+  if (liveChecked.has(key)) return liveChecked.get(key);
+  let ok = false;
+  try {
+    const r = await fetch(`${STORE_URL}/products/${encodeURIComponent(key).replace(/%2F/g, '/')}`, {
+      method: 'HEAD', redirect: 'follow', headers: { 'user-agent': 'neu-index-builder' },
+    });
+    ok = r.ok;
+  } catch { ok = false; }   // network failure: stay conservative and let the gate exclude it
+  liveChecked.set(key, ok);
+  return ok;
+}
+
 export async function buildIndex() {
   const LIVE_HANDLES = await sitemapHandles();
   console.error(`sitemap live product handles: ${LIVE_HANDLES.size}${LIVE_HANDLES.size ? '' : ' (gate disabled)'}`);
 
-  let cursor = null, scanned = 0, excluded = 0;
+  let cursor = null, scanned = 0, excluded = 0, rescued = 0, staleGate = 0;
   const items = [];
   do {
   const d = await gql(Q, { c: cursor });
@@ -180,7 +205,16 @@ export async function buildIndex() {
     scanned++;
     const v = (p.variants.nodes && p.variants.nodes[0]) || {};
     if (!p.onlineStoreUrl) { excluded++; continue; }           // must be live on the Online Store (drops active-but-unpublished 404s)
-    if (LIVE_HANDLES.size && !LIVE_HANDLES.has(String(p.handle || '').toLowerCase())) { excluded++; continue; } // must be in the storefront sitemap (drops Admin-published-but-404 products)
+    // Must be in the storefront sitemap (drops Admin-published-but-404 products), EXCEPT for very
+    // recent products, where absence usually means the sitemap has not caught up rather than that the
+    // product is dead. Those get one HEAD against the storefront and are kept only on a 200.
+    if (LIVE_HANDLES.size && !LIVE_HANDLES.has(String(p.handle || '').toLowerCase())) {
+      const ageMs = p.createdAt ? Date.now() - Date.parse(p.createdAt) : Infinity;
+      if (!(ageMs >= 0 && ageMs < RECENT_MS)) { excluded++; continue; }   // old and absent -> genuinely not live
+      staleGate++;
+      if (!(await storefrontLive(p.handle))) { excluded++; continue; }    // recent but really 404 -> drop
+      rescued++;                                                          // recent, live, sitemap just behind
+    }
     if (!v.availableForSale) continue;                         // in-stock / not-tracked only (drops 0-stock)
     if (p.isGiftCard || EXCLUDE_TYPE.test(p.productType || '') || EXCLUDE_TITLE.test(p.title || '')) { excluded++; continue; } // gift/connections/services/warranties/kits/special orders
 
@@ -247,7 +281,7 @@ function facetsFromMetafields(nodes) {
   const tagged = items.filter((it) => it.f && it.f.category).length;
   const fc = {};
   for (const it of items) for (const k of Object.keys(it.f)) fc[k] = (fc[k] || 0) + 1;
-  return { items, stats: { indexed: items.length, scanned, excluded, tagged, sitemap: LIVE_HANDLES.size, source: FROM_MF ? 'metafields' : 'tags', coverage: fc } };
+  return { items, stats: { indexed: items.length, scanned, excluded, tagged, sitemap: LIVE_HANDLES.size, rescued, staleGate, source: FROM_MF ? 'metafields' : 'tags', coverage: fc } };
 }
 
 // CLI: `node build-index.mjs` builds + writes filter-index.json (GitHub Action / local runs).
@@ -256,6 +290,9 @@ if (process.argv[1] && process.argv[1].replace(/\\/g, '/').endsWith('build-index
   const { items, stats } = await buildIndex();
   writeFileSync(new URL('./filter-index.json', import.meta.url), JSON.stringify(items));
   console.log(`[source: ${stats.source}] indexed ${stats.indexed} browsable products of ${stats.scanned} active scanned (excluded ${stats.excluded} gift/connection/service; 0-stock dropped)`);
+  if (stats.staleGate) {
+    console.log(`sitemap grace: ${stats.staleGate} recent product(s) were absent from the sitemap, ${stats.rescued} confirmed live and kept, ${stats.staleGate - stats.rescued} really 404 and dropped`);
+  }
   console.log(`  filterable now (have category facet): ${stats.tagged}  |  shown-but-not-yet-filterable: ${stats.indexed - stats.tagged}`);
   console.log('facet coverage:', JSON.stringify(stats.coverage));
 }
