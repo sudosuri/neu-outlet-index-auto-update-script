@@ -281,6 +281,11 @@ function facetsFromMetafields(nodes) {
   const tagged = items.filter((it) => it.f && it.f.category).length;
   const fc = {};
   for (const it of items) for (const k of Object.keys(it.f)) fc[k] = (fc[k] || 0) + 1;
+  // Logged here, not in the CLI-only block below: api/rebuild.mjs imports buildIndex(), so anything
+  // printed down there never reaches the Vercel cron logs, which is exactly where this is needed.
+  if (staleGate) {
+    console.log(`sitemap grace: ${staleGate} recent product(s) absent from the sitemap, ${rescued} confirmed live and kept, ${staleGate - rescued} really 404 and dropped`);
+  }
   return { items, stats: { indexed: items.length, scanned, excluded, tagged, sitemap: LIVE_HANDLES.size, rescued, staleGate, source: FROM_MF ? 'metafields' : 'tags', coverage: fc } };
 }
 
@@ -290,9 +295,6 @@ if (process.argv[1] && process.argv[1].replace(/\\/g, '/').endsWith('build-index
   const { items, stats } = await buildIndex();
   writeFileSync(new URL('./filter-index.json', import.meta.url), JSON.stringify(items));
   console.log(`[source: ${stats.source}] indexed ${stats.indexed} browsable products of ${stats.scanned} active scanned (excluded ${stats.excluded} gift/connection/service; 0-stock dropped)`);
-  if (stats.staleGate) {
-    console.log(`sitemap grace: ${stats.staleGate} recent product(s) were absent from the sitemap, ${stats.rescued} confirmed live and kept, ${stats.staleGate - stats.rescued} really 404 and dropped`);
-  }
   console.log(`  filterable now (have category facet): ${stats.tagged}  |  shown-but-not-yet-filterable: ${stats.indexed - stats.tagged}`);
   console.log('facet coverage:', JSON.stringify(stats.coverage));
 }
