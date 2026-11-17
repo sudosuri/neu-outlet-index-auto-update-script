@@ -224,8 +224,10 @@ export async function buildIndex() {
       f = facetsFromTags(p.tags);                  // old bare + new prefixed tags; condition bridged
       prio = condPrio(f.condition || []);
     }
-    // Drop Miscellaneous-only products (special orders / uncategorized) — not browsable appliances.
-    if (f.category && f.category.length === 1 && String(f.category[0]).toUpperCase() === 'MISC') { excluded++; continue; }
+    // MISC is NOT 'special orders / uncategorized'. Confirmed by Neu Link (Vitaly, 17 Nov 2026):
+    // Miscellaneous = warming drawers, grills, griddles and air purifiers, 9 for sale today, and he
+    // asked for it in the filter map. filter-map.json already draws the "Miscellaneous" pill, so
+    // dropping these products here made that pill a dead end on live. Keep them.
 
     let cond, badge;
     const ab = alphaBadge(f.condition);
